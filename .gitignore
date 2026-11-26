@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 训练产物（用脚本重新生成）
+decoder_lm/lm*.pkl
+decoder_lm/nlm/
+decoder_lm/*.bin
+decoder_lm/*.safetensors
+
+# 模型权重与数据
+*.onnx
+*.pth
+*.tar
+*.tar.gz
+*.wav
+*.mp3
+data/
+models/
+
+# 实验输出
+results/*.json
+!results/tune_result.json
+*.log
+
+# IDE
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store
+
+# 临时
+scripts/_refactor_paths.py
