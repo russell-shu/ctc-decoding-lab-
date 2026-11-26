@@ -215,7 +215,21 @@ python decoder_lm/wfst_verify/verify_wfst.py --limit 400 --big
 
 ---
 
-## 六、说明
+## 六、待办
+
+- [ ] **验证 `rescore_cross.py` 在本目录结构下的完整运行**。该脚本依赖 `qwen_asr` 包，
+      而 `qwen_asr/inference/qwen3_forced_aligner.py:21` 在**顶层** `import nagisa`，
+      缺失会阻断整个包导入。首次运行前先执行 `bash scripts/setup_deps.sh`，
+      并设置 `export PYTHONPATH=/tmp/qwen_asr_deps:$PYTHONPATH`。
+      当前仓库内已验证通过的是 `smoke_beam.py`（greedy vs beam 路径正确）。
+- [ ] 全量复跑各实验，统一到 2070 条完整测试集口径
+      （本文表 3/4 两行为 400 条子集结果，已标注）。
+- [ ] 仓库名去掉末尾多余连字符：`ctc-decoding-lab-` → `ctc-decoding-lab`。
+- [ ] 补充 `results/` 目录的完整扫描输出（α 曲线、beam 扫描、oracle 明细）。
+- [ ] 上线方案：跨模型重排的**按需触发**策略（仅在帧级置信度低或与上一段文本
+      冲突的片段上调用第二模型），以控制实时链路的双模型成本。
+
+## 七、说明
 
 - 仓库**不含模型权重与数据集**，只含实现与实验脚本
 - `decoder_lm/lm*.pkl` 与 `decoder_lm/nlm/` 为训练产物，已 gitignore，用脚本重新生成
